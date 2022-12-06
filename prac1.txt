@@ -639,3 +639,314 @@ BulkWriteResult({
 }
 > ^C
 bye
+
+Actor Insertion -- 
+
+──(student㉿kali)-[~]
+└─$ mongo
+MongoDB shell version v4.2.22
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("f80369a9-b49d-4cba-a10a-e93e7946befe") }
+MongoDB server version: 4.2.22
+Server has startup warnings: 
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] 
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] 
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> use movie
+switched to db movie
+
+> db
+movie
+> show dbs
+Allen   0.000GB
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+movie   0.000GB
+
+> db.actor.insert([{ "actor id": 1, fname: "aamir", lname: "khan", address: [ {street:"wall street"}, {city:"new york"}, {state:"mid state"}, {country:"usa"}, {pincode:"62201"} ], "contact details":[ {emailid:"aamirkhan@gmail.com"}, {phoneno:"7995040688"} ]}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.actor.insert([{ "actor id": 2, fname: "akshay", lname: "kumar", address: [ {street:"krishna chowk"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411021"} ], "contact details":[ {emailid:"akshaykumar@gmail.com"}, {phoneno:"8695840128"} ]},{ "actor id": 3, fname: "kriti", lname: "sanon", address: [ {street:"chandni chowk"}, {city:"nashik"}, {state:"maharashtra"}, {country:"pune"}, {pincode:"41201"} ], "contact details":[ {emailid:"kritisanongmail.com"}, {phoneno:"8183042188"} ]}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.actor.insert([{ "actor id": 4, fname: "salman", lname: "khan", address: [ {street:"patil wada"}, {city:"nagpur"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411321"} ], "contact details":[ {emailid:"salmankhan@gmail.com"}, {phoneno:"7295812328"} ]},{ "actor id": 5, fname: "shahrukh", lname: "khan", address: [ {street:"behind dinsour garden"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411061"} ], "contact details":[ {emailid:"shahrukhkhan@gmail.com"}, {phoneno:"7383042348"} ]}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.actor.insert([{ "actor id": 6, fname: "sharman", lname: "joshi", address: [ {street:"gulmohar"}, {city:"nashik"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411311"} ], "contact details":[ {emailid:"sharmanjoshi@gmail.com"}, {phoneno:"8795812328"} ]},{ "actor id": 7, fname: "madhuri", lname: "dixit", address: [ {street:"pimple gurav"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411031"} ], "contact details":[ {emailid:"madhuridixit@gmail.com"}, {phoneno:"9383042348"} ]}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.actor.find().pretty()
+{
+	"_id" : ObjectId("638ef3c038df3946093ef20c"),
+	"actor id" : 1,
+	"fname" : "aamir",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "new york"
+		},
+		{
+			"state" : "mid state"
+		},
+		{
+			"country" : "usa"
+		},
+		{
+			"pincode" : "62201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "aamirkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7995040688"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef50938df3946093ef20d"),
+	"actor id" : 2,
+	"fname" : "akshay",
+	"lname" : "kumar",
+	"address" : [
+		{
+			"street" : "krishna chowk"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411021"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "akshaykumar@gmail.com"
+		},
+		{
+			"phoneno" : "8695840128"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef50938df3946093ef20e"),
+	"actor id" : 3,
+	"fname" : "kriti",
+	"lname" : "sanon",
+	"address" : [
+		{
+			"street" : "chandni chowk"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "pune"
+		},
+		{
+			"pincode" : "41201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritisanongmail.com"
+		},
+		{
+			"phoneno" : "8183042188"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef5e138df3946093ef20f"),
+	"actor id" : 4,
+	"fname" : "salman",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "patil wada"
+		},
+		{
+			"city" : "nagpur"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411321"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "salmankhan@gmail.com"
+		},
+		{
+			"phoneno" : "7295812328"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef5e138df3946093ef210"),
+	"actor id" : 5,
+	"fname" : "shahrukh",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "behind dinsour garden"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411061"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "shahrukhkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7383042348"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef69938df3946093ef211"),
+	"actor id" : 6,
+	"fname" : "sharman",
+	"lname" : "joshi",
+	"address" : [
+		{
+			"street" : "gulmohar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411311"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "sharmanjoshi@gmail.com"
+		},
+		{
+			"phoneno" : "8795812328"
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ef69938df3946093ef212"),
+	"actor id" : 7,
+	"fname" : "madhuri",
+	"lname" : "dixit",
+	"address" : [
+		{
+			"street" : "pimple gurav"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411031"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "madhuridixit@gmail.com"
+		},
+		{
+			"phoneno" : "9383042348"
+		}
+	]
+}
+> 
