@@ -1,0 +1,1818 @@
+┌──(student㉿kali)-[~]
+└─$ mongo
+MongoDB shell version v4.2.22
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("fa1c6585-c1a3-44a5-b433-5bbfc588d3ad") }
+MongoDB server version: 4.2.22
+Server has startup warnings: 
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] 
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2022-12-06T11:09:13.403+0530 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2022-12-06T11:09:18.962+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] 
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2022-12-06T11:09:19.087+0530 I  CONTROL  [initandlisten] 
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> cls
+
+
+
+
+
+
+> use movie
+switched to db movie
+> db.createCollection("film")
+{ "ok" : 1 }
+> db.createCollection("actor")
+{ "ok" : 1 }
+> show collections
+actor
+film
+> db.film.insert([
+... {
+... "film id":101,
+... title:"saaho",
+... "year of release":2019,
+... genre:['action','adventure'],
+... actors:[
+... {fname:"prabhas",lname:"india"},
+... {fname:"jacqueline",lname:"fernandes"}
+... ],
+... directors:[
+... {fname:"karan",lname:"johar"},
+... {fname:"steve",lname:"smith"}
+... ],
+... "release details":[
+... {"places of release:["mumbai","pune","nashik"]},
+2022-12-06T11:47:45.070+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing : after property id :
+@(shell):16:22
+> db.film.insert([ { "film id":101, title:"saaho", "year of release":2019, genre:['action','adventure'], actors:[ {fname:"prabhas",lname:"india"}, {fname:"jacqueline",lname:"fernandes"} ], directors:[ {fname:"karan",lname:"johar"}, {fname:"steve",lname:"smith"} ], "release details":[ {"places of release":["mumbai","pune","nashik"]},
+... {"dates":["1/1/2019","2/2/2020"]},
+... {"rating of film":4}
+... ]
+... }
+... ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+> db.film.insert([ { "film id":102, title:"Housefull 4", "year of release":2019, genre:['comedy'], actors:[ {fname:"akshay",lname:"kumar"}, {fname:"kriti",lname:"sanon"} ], directors:[ {fname:"farhad",lname:"samji"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/10/2019"]}, {"rating of film":6} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+> db.film.insert([ { "film id":103, title:"Bharat", "year of release":2019, genre:['action'], actors:[ {fname:"salman",lname:"khan"}, {fname:"kartina",lname:"karif"} ], directors:[ {fname:"ali abbas",lname:"zafar"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/06/2019"]}, {"rating of film":5.5} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+> db.film.insert([ { "film id":104, title:"devdas", "year of release":2002, genre:['romantic'], actors:[ {fname:"shahrukh",lname:"khan"}, {fname:"madhuri",lname:"dixit"} ], directors:[ {fname:"sanjay",lname:"leela"}], "release details":[ {"places of release":["pune","mumbai"]}, {"dates":["25/06/2019"]}, {"rating of film":5.5} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+> db.film.insert([ { "film id":105, title:"koyla", "year of release":1997, genre:['action'], actors:[ {fname:"shahrukh",lname:"khan"}, {fname:"madhuri",lname:"dixit"} ], directors:[ {fname:"rakesh",lname:"roshan"}], "release details":[ {"places of release":["pune","mumbai","nagpur"]}, {"dates":["18/04/2019"]}, {"rating of film":7.5} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+> db.film.insert([ { "film id":106, title:"3 idiots", "year of release":2009, genre:['comedy-drama'], actors:[ {fname:"aamir",lname:"khan"}, {fname:"R.",lname:"Madhavan"}, {fname:"Sharman", lname:"joshi"}, {fname:"Kareena", lname:"kappor"} ], directors:[ {fname:"rajkumar",lname:"hirani"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/12/2019"]}, {"rating of film":8.5} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eeb40981a41b09fceaf1e"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+> db.film.insert([ { "film id":107, title:"dangal", "year of release":2016, genre:['sport-drama'], actors:[ {fname:"aamir",lname:"khan"}, {fname:"kiran",lname:"rao"}, {fname:"Siddharth", lname:"kapur"} ], directors:[ {fname:"Nitesh",lname:"tiwari"}], "release details":[ {"places of release":["mumbai"]}, {"dates":["23/12/2016"]}, {"rating of film":6.5} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eeb40981a41b09fceaf1e"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eec1e981a41b09fceaf1f"),
+	"film id" : 107,
+	"title" : "dangal",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kiran",
+			"lname" : "rao"
+		},
+		{
+			"fname" : "Siddharth",
+			"lname" : "kapur"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "Nitesh",
+			"lname" : "tiwari"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"23/12/2016"
+			]
+		},
+		{
+			"rating of film" : 6.5
+		}
+	]
+}
+> db.film.insert([ { "film id":108, title:"sultan", "year of release":2016, genre:['sport-drama'], actors:[ {fname:"salman",lname:"khan"}, {fname:"anushka",lname:"Sharma"} ], directors:[ {fname:"ali abbas",lname:"zafar"}], "release details":[ {"places of release":["nashik"]}, {"dates":["06/07/2016"]}, {"rating of film":7.7} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.insert([ { "film id":109, title:"war", "year of release":2019, genre:['thriller'], actors:[ {fname:"hrithik",lname:"roshan"}, {fname:"tiger",lname:"Shroff"} ], directors:[ {fname:"siddharth",lname:"anand"}], "release details":[ {"places of release":["pune"]}, {"dates":["02/10/2019"]}, {"rating of film":8.8} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.insert([ { "film id":110, title:"Uri: The Surgical Strike", "year of release":2019, genre:['military-action'], actors:[ {fname:"kirti",lname:"kulhari"}, {fname:"ronnie",lname:"screwvala"} ], directors:[ {fname:"aditya",lname:"dhar"}], "release details":[ {"places of release":["pune"]}, {"dates":["11/01/2019"]}, {"rating of film":9.0} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eeb40981a41b09fceaf1e"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eec1e981a41b09fceaf1f"),
+	"film id" : 107,
+	"title" : "dangal",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kiran",
+			"lname" : "rao"
+		},
+		{
+			"fname" : "Siddharth",
+			"lname" : "kapur"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "Nitesh",
+			"lname" : "tiwari"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"23/12/2016"
+			]
+		},
+		{
+			"rating of film" : 6.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eecd5981a41b09fceaf20"),
+	"film id" : 108,
+	"title" : "sultan",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "anushka",
+			"lname" : "Sharma"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"06/07/2016"
+			]
+		},
+		{
+			"rating of film" : 7.7
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eed77981a41b09fceaf21"),
+	"film id" : 109,
+	"title" : "war",
+	"year of release" : 2019,
+	"genre" : [
+		"thriller"
+	],
+	"actors" : [
+		{
+			"fname" : "hrithik",
+			"lname" : "roshan"
+		},
+		{
+			"fname" : "tiger",
+			"lname" : "Shroff"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "siddharth",
+			"lname" : "anand"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"02/10/2019"
+			]
+		},
+		{
+			"rating of film" : 8.8
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eee32981a41b09fceaf22"),
+	"film id" : 110,
+	"title" : "Uri: The Surgical Strike",
+	"year of release" : 2019,
+	"genre" : [
+		"military-action"
+	],
+	"actors" : [
+		{
+			"fname" : "kirti",
+			"lname" : "kulhari"
+		},
+		{
+			"fname" : "ronnie",
+			"lname" : "screwvala"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "aditya",
+			"lname" : "dhar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"11/01/2019"
+			]
+		},
+		{
+			"rating of film" : 9
+		}
+	]
+}
+> ^C
+bye
