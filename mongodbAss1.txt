@@ -1,0 +1,898 @@
+
+Database Technologies: MongoDB Practical Assignment 1
+
+1. Create a database with the name ‘Movie’.
+2. A ‘Film’ is a collection of documents with the following fields:
+	a. Film Id
+	b. Title of the film
+	c. Year of release
+	d. Genre / Category (like adventure, action, sci-fi, romantic etc.) A film can belong to more than one genre.
+	e. Actors (First name and Last name) 
+		A film can have more than one actor.
+	f. Director (First name and Last name) 
+		A film can have more than one director.
+	g. Release details (It consists of places of release, dates of release and rating ofthe film.)
+3. An ‘Actor’ is a collection of documents with the following fields:
+	a. Actor Id
+	b. First name
+	c. Last Name
+	d. Address (Street, City, State, Country, Pin-code)
+	e. Contact Details (Email Id and Phone No)
+	f. Age of an actor.
+
+> use movie
+switched to db movie
+
+
+> db.createCollection("film")
+{ "ok" : 1 }
+
+
+> db.createCollection("actor")
+{ "ok" : 1 }
+> show collections
+actor
+film
+
+1. Insert at least 10 documents in the collection Film –
+	a. Insert at least one document with film belonging to two genres.
+	b. Insert at least one document with film that is released at more than one place and on two different dates.
+	c. Insert at least three documents with the films released in the same year.
+	d. Insert at least two documents with the films directed by one director.
+	e. Insert at least two documents with films those are acted by a pair ‘Madhuri Dixit’ and ‘Shahrukh Khan’. 
+=>
+
+> db.film.insert([ { "film id":101, title:"saaho", "year of release":2019, genre:['action','adventure'], actors:[ {fname:"prabhas",lname:"india"}, {fname:"jacqueline",lname:"fernandes"} ], directors:[ {fname:"karan",lname:"johar"}, {fname:"steve",lname:"smith"} ], "release details":[ {"places of release":["mumbai","pune","nashik"]},{"dates":["1/1/2019","2/2/2020"]},{"rating of film":4}]}, { "film id":102, title:"Housefull 4", "year of release":2019, genre:['comedy'], actors:[ {fname:"akshay",lname:"kumar"}, {fname:"kriti",lname:"sanon"} ], directors:[ {fname:"farhad",lname:"samji"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/10/2019"]}, {"rating of film":6}]}, { "film id":103, title:"Bharat", "year of release":2019, genre:['action'], actors:[ {fname:"salman",lname:"khan"}, {fname:"kartina",lname:"karif"} ], directors:[ {fname:"ali abbas",lname:"zafar"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/06/2019"]}, {"rating of film":5.5} ] }, { "film id":104, title:"devdas", "year of release":2002, genre:['romantic'], actors:[ {fname:"shahrukh",lname:"khan"}, {fname:"madhuri",lname:"dixit"} ], directors:[ {fname:"sanjay",lname:"leela"}], "release details":[ {"places of release":["pune","mumbai"]}, {"dates":["25/06/2019"]}, {"rating of film":5.5} ] }, { "film id":105, title:"koyla", "year of release":1997, genre:['action'], actors:[ {fname:"shahrukh",lname:"khan"}, {fname:"madhuri",lname:"dixit"} ], directors:[ {fname:"rakesh",lname:"roshan"}], "release details":[ {"places of release":["pune","mumbai","nagpur"]}, {"dates":["18/04/2019"]}, {"rating of film":7.5} ] }, { "film id":106, title:"3 idiots", "year of release":2009, genre:['comedy-drama'], actors:[ {fname:"aamir",lname:"khan"}, {fname:"R.",lname:"Madhavan"}, {fname:"Sharman", lname:"joshi"}, {fname:"Kareena", lname:"kappor"} ], directors:[ {fname:"rajkumar",lname:"hirani"}], "release details":[ {"places of release":["pune"]}, {"dates":["25/12/2019"]}, {"rating of film":8.5} ] }, { "film id":107, title:"dangal", "year of release":2016, genre:['sport-drama'], actors:[ {fname:"aamir",lname:"khan"}, {fname:"kiran",lname:"rao"}, {fname:"Siddharth", lname:"kapur"} ], directors:[ {fname:"Nitesh",lname:"tiwari"}], "release details":[ {"places of release":["mumbai"]}, {"dates":["23/12/2016"]}, {"rating of film":6.5} ] }, { "film id":108, title:"sultan", "year of release":2016, genre:['sport-drama'], actors:[ {fname:"salman",lname:"khan"}, {fname:"anushka",lname:"Sharma"} ], directors:[ {fname:"ali abbas",lname:"zafar"}], "release details":[ {"places of release":["nashik"]}, {"dates":["06/07/2016"]}, {"rating of film":7.7} ] }, { "film id":109, title:"war", "year of release":2019, genre:['thriller'], actors:[ {fname:"hrithik",lname:"roshan"}, {fname:"tiger",lname:"Shroff"} ], directors:[ {fname:"siddharth",lname:"anand"}], "release details":[ {"places of release":["pune"]}, {"dates":["02/10/2019"]}, {"rating of film":8.8} ] }, { "film id":110, title:"Uri: The Surgical Strike", "year of release":2019, genre:['military-action'], actors:[ {fname:"kirti",lname:"kulhari"}, {fname:"ronnie",lname:"screwvala"} ], directors:[ {fname:"aditya",lname:"dhar"}], "release details":[ {"places of release":["pune"]}, {"dates":["11/01/2019"]}, {"rating of film":9.0} ] },])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 10,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+
+2.Insert at least 10 documents in the collection Actor.
+	Make sure, you are inserting the names of actors who have acted in films, given in the ‘Film’ collection.
+=>
+
+> db.actor.insert([{ "actor id": 1, fname: "aamir", lname: "khan", address: [ {street:"wall street"}, {city:"new york"}, {state:"mid state"}, {country:"usa"}, {pincode:"62201"} ], "contact details":[ {emailid:"aamirkhan@gmail.com"}, {phoneno:"7995040688"}], age: 25}, { "actor id": 2, fname: "akshay", lname: "kumar", address: [ {street:"krishna chowk"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411021"} ], "contact details":[ {emailid:"akshaykumar@gmail.com"}, {phoneno:"8695840128"}], age: 19 }, { "actor id": 3, fname: "kriti", lname: "sanon", address: [ {street:"chandni chowk"}, {city:"nashik"}, {state:"maharashtra"}, {country:"india"}, {pincode:"41201"} ], "contact details":[ {emailid:"kritisanongmail.com"}, {phoneno:"8183042188"}], age: 29 }, { "actor id": 4, fname: "salman", lname: "khan", address: [ {street:"patil wada"}, {city:"nagpur"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411321"} ], "contact details":[ {emailid:"salmankhan@gmail.com"}, {phoneno:"7295812328"} ], age: 55 }, { "actor id": 5, fname: "shahrukh", lname: "khan", address: [ {street:"behind dinsour garden"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411061"} ], "contact details":[ {emailid:"shahrukhkhan@gmail.com"}, {phoneno:"7383042348"}], age: 50 }, { "actor id": 6, fname: "sharman", lname: "joshi", address: [ {street:"gulmohar"}, {city:"nashik"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411311"} ], "contact details":[ {emailid:"sharmanjoshi@gmail.com"}, {phoneno:"8795812328"}], age: 35 }, { "actor id": 7, fname: "madhuri", lname: "dixit", address: [ {street:"pimple gurav"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411031"} ], "contact details":[ {emailid:"madhuridixit@gmail.com"}, {phoneno:"9383042348"}], age: 27 }, { "actor id": 8, fname: "ronnie", lname: "screwala", address: [ {street:"laxmi nagar"}, {city:"nashik"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411301"} ], "contact details":[ {emailid:"ronniescrewala@gmail.com"}, {phoneno:"8885812328"}], age: 30 }, { "actor id": 9, fname: "kriti", lname: "kulhari", address: [ {street:"pimple saudhagar"}, {city:"pune"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411081"} ], "contact details":[ {emailid:"kritikulhari@gmail.com"}, {phoneno:"8483042348"}], age: 26 }, { "actor id": 10, fname: "tiger", lname: "shroff", address: [ {street:"gavothan"}, {city:"nagpur"}, {state:"maharashtra"}, {country:"india"}, {pincode:"411321"} ], "contact details":[ {emailid:"tigershroff@gmail.com"}, {phoneno:"7785812328"}], age: 34 }])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 10,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+
+3. Display all the documents inserted in both the collections.
+=>
+
+-- Film Collection
+
+> db.film.find().pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3d9"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3da"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3db"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dc"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dd"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3de"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},> db.film.update({directors: { fname:"aditya",lname:"dhar"}},{$set:{"genre": ["comedy","drama"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3df"),
+	"film id" : 107,
+	"title" : "dangal",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kiran",
+			"lname" : "rao"
+		},
+		{
+			"fname" : "Siddharth",
+			"lname" : "kapur"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "Nitesh",
+			"lname" : "tiwari"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"23/12/2016"
+			]
+		},
+		{
+			"rating of film" : 6.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3e0"),
+	"film id" : 108,
+	"title" : "sultan",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "anushka",
+			"lname" : "Sharma"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"06/07/2016"
+			]
+		},
+		{
+			"rating of film" : 7.7
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3e1"),
+	"film id" : 109,
+	"title" : "war",
+	"year of release" : 2019,
+	"genre" : [
+		"thriller"
+	],
+	"actors" : [
+		{
+			"fname" : "hrithik",
+			"lname" : "roshan"
+		},
+		{
+			"fname" : "tiger",
+			"lname" : "Shroff"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "siddharth",
+			"lname" : "anand"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"02/10/2019"
+			]
+		},
+		{
+			"rating of film" : 8.8
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3e2"),
+	"film id" : 110,
+	"title" : "Uri: The Surgical Strike",
+	"year of release" : 2019,
+	"genre" : [
+		"military-action"
+	],
+	"actors" : [
+		{
+			"fname" : "kirti",
+			"lname" : "kulhari"
+		},
+		{
+			"fname" : "ronnie",
+			"lname" : "screwvala"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "aditya",
+			"lname" : "dhar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"11/01/2019"
+			]
+		},
+		{
+			"rating of film" : 9
+		}
+	]
+}
+
+-- Actor Collection
+
+> db.actor.find().pretty()
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e3"),
+	"actor id" : 1,
+	"fname" : "aamir",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "new york"
+		},
+		{
+			"state" : "mid state"
+		},
+		{
+			"country" : "usa"
+		},
+		{
+			"pincode" : "62201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "aamirkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7995040688"
+		}
+	],
+	"age" : 25
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e4"),
+	"actor id" : 2,
+	"fname" : "akshay",
+	"lname" : "kumar",
+	"address" : [
+		{
+			"street" : "krishna chowk"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411021"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "akshaykumar@gmail.com"
+		},
+		{
+			"phoneno" : "8695840128"
+		}
+	],
+	"age" : 19
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e5"),
+	"actor id" : 3,
+	"fname" : "kriti",
+	"lname" : "sanon",
+	"address" : [
+		{
+			"street" : "chandni chowk"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "41201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritisanongmail.com"
+		},
+		{
+			"phoneno" : "8183042188"
+		}
+	],
+	"age" : 29
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e6"),
+	"actor id" : 4,
+	"fname" : "salman",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "patil wada"
+		},
+		{
+			"city" : "nagpur"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411321"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "salmankhan@gmail.com"
+		},
+		{
+			"phoneno" : "7295812328"
+		}
+	],
+	"age" : 55
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e7"),
+	"actor id" : 5,
+	"fname" : "shahrukh",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "behind dinsour garden"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411061"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "shahrukhkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7383042348"
+		}
+	],
+	"age" : 50
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e8"),
+	"actor id" : 6,
+	"fname" : "sharman",
+	"lname" : "joshi",
+	"address" : [
+		{
+			"street" : "gulmohar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411311"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "sharmanjoshi@gmail.com"
+		},
+		{
+			"phoneno" : "8795812328"
+		}
+	],
+	"age" : 35
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e9"),
+	"actor id" : 7,
+	"fname" : "madhuri",
+	"lname" : "dixit",
+	"address" : [
+		{
+			"street" : "pimple gurav"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411031"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "madhuridixit@gmail.com"
+		},
+		{
+			"phoneno" : "9383042348"
+		}
+	],
+	"age" : 27
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3ea"),
+	"actor id" : 8,
+	"fname" : "ronnie",
+	"lname" : "screwala",
+	"address" : [
+		{
+			"street" : "laxmi nagar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411301"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "ronniescrewala@gmail.com"
+		},
+		{
+			"phoneno" : "8885812328"
+		}
+	],
+	"age" : 30
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3eb"),
+	"actor id" : 9,
+	"fname" : "kriti",
+	"lname" : "kulhari",
+	"address" : [
+		{
+			"street" : "pimple saudhagar"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411081"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritikulhari@gmail.com"
+		},
+		{
+			"phoneno" : "8483042348"
+		}
+	],
+	"age" : 26
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3ec"),
+	"actor id" : 10,
+	"fname" : "tiger",
+	"lname" : "shroff",
+	"address" : [
+		{
+			"street" : "gavothan"
+		},
+		{
+			"city" : "nagpur"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411321"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "tigershroff@gmail.com"
+		},
+		{
+			"phoneno" : "7785812328"
+		}
+	],
+	"age" : 34
+}
+
+
+4. Add a value to the rating of the film whose title starts with 'U'.
+=>
+
+> db.film.update({title:/^U/},{$set:{"release details": [{"rating of film":2.5}]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+5. Add an actor named "teri meri kahaani" in the ‘Actor’ collection. Also add the details of the film in ‘Film’ collection in which this actor has acted in.
+=>
+
+> db.actor.insert([{ "actor id": 11, fname: "shahid", lname: "kapoor", address: [ {street:"pimpri"}, {city:"pune"}, {state:"maharashtra"}, {country:"pune"}, {pincode:"411011"} ], "contact details":[ {emailid:"shahidkapoor@gmail.com"}, {phoneno:"8195040688"}], age: 29 }])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.film.insert([ { "film id":111, title:"teri meri kahaani", "year of release":2012, genre:['romantic','comedy'], actors:[ {fname:"shahid",lname:"kapoor"}, {fname:"priyanka",lname:"chopra"} ], directors:[ {fname:"kunal",lname:"kohli"}], "release details":[ {"places of release":["mumbai"]}, {"dates":["22/06/2012"]}, {"rating of film":4.8} ] } ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+
+
+6. Delete the film "teri meri kahaani".
+=>
+
+> db.film.remove({title:"teri meri kahaani"})
+WriteResult({ "nRemoved" : 1 })
+
+7. Delete an actor named "shahid".
+=>
+
+> db.actor.remove({fname:"shahid"})
+WriteResult({ "nRemoved" : 1 })
+
+
+8. Delete all actors from an ‘Actor’ collection who have age greater than "50"
+=>
+
+> db.actor.remove({age:{$gt:50}})
+WriteResult({ "nRemoved" : 1 })
+
+
+9. Update the actor’s address where Actor Id is "10".
+=>
+
+> db.actor.update({"actor id": 10},{$set:{address: [{street: "pimprigao"},{city:"nashik"},{state:"maharashtra"},{pincode:"321104"}]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+10.Update the genre of the film directed by "aditya dhar".
+=>
+> db.film.update({directors: { fname:"aditya",lname:"dhar"}},{$set:{"genre": ["comedy","drama"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
