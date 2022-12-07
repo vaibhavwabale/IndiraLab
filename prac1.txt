@@ -830,6 +830,262 @@ Assignment 3 ---
 }
 > 
 
+7.
+> db.actor.find().sort({'age': 1}).pretty()
+{
+	"_id" : ObjectId("638ef50938df3946093ef20e"),
+	"actor id" : 3,
+	"fname" : "kriti",
+	"lname" : "sanon",
+	"address" : [
+		{
+			"street" : "chandni chowk"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "pune"
+		},
+		{
+			"pincode" : "41201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritisanongmail.com"
+		},
+		{
+			"phoneno" : "8183042188"
+		}
+	],
+	"age" : 19
+}
+{
+	"_id" : ObjectId("639027ee4ee774167e82a9ba"),
+	"actor id" : 10,
+	"fname" : "tiger",
+	"lname" : "shroff",
+	"address" : [
+		{
+			"street" : "pimprigao"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"pincode" : "321104"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "tigershroff@gmail.com"
+		},
+		{
+			"phoneno" : "7785812328"
+		}
+	],
+	"age" : 20
+}
+{
+	"_id" : ObjectId("638ef5e138df3946093ef20f"),
+	"actor id" : 4,
+	"fname" : "salman",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "patil wada"
+		},
+		{
+			"city" : "nagpur"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411321"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "salmankhan@gmail.com"
+		},
+		{
+			"phoneno" : "7295812328"
+		}
+	],
+	"age" : 22
+}
+{
+	"_id" : ObjectId("639027954ee774167e82a9b8"),
+	"actor id" : 8,
+	"fname" : "ronnie",
+	"lname" : "screwala",
+	"address" : [
+		{
+			"street" : "laxmi nagar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411301"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "ronniescrewala@gmail.com"
+		},
+		{
+			"phoneno" : "8885812328"
+		}
+	],
+	"age" : 25
+}
+{
+	"_id" : ObjectId("638ef50938df3946093ef20d"),
+	"actor id" : 2,
+	"fname" : "akshay",
+	"lname" : "kumar",
+	"address" : [
+		{
+			"street" : "krishna chowk"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411021"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "akshaykumar@gmail.com"
+		},
+		{
+			"phoneno" : "8695840128"
+		}
+	],
+	"age" : 28
+}
+{
+	"_id" : ObjectId("638ef3c038df3946093ef20c"),
+	"actor id" : 1,
+	"fname" : "aamir",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "new york"
+		},
+		{
+			"state" : "mid state"
+		},
+		{
+			"country" : "usa"
+		},
+		{
+			"pincode" : "62201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "aamirkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7995040688"
+		}
+	],
+	"age" : 30
+}
+{
+	"_id" : ObjectId("639026e24ee774167e82a9b6"),
+	"actor id" : 6,
+	"fname" : "sharman",
+	"lname" : "joshi",
+	"address" : [
+		{
+			"street" : "gulmohar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411311"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "sharmanjoshi@gmail.com"
+		},
+		{
+			"phoneno" : "8795812328"
+		}
+	],
+	"age" : 33
+}
+{
+	"_id" : ObjectId("639027954ee774167e82a9b9"),
+	"actor id" : 9,
+	"fname" : "kriti",
+	"lname" : "kulhari",
+	"address" : [
+		{
+			"street" : "pimple saudhagar"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411081"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritikulhari@gmail.com"
+		},
+		{
+			"phoneno" : "8483042348"
+		}
+	],
+	"age" : 45
+}
+>
 
 
 
