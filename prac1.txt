@@ -986,3 +986,8 @@ BulkWriteResult({
 	]
 }
 
+4. Add a value to the rating of the film whose title starts with ‘U’.
+> db.film.update({title:{$regex:/^U.*/}},{$set:{"rating of film":2.5}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+
