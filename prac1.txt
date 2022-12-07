@@ -268,6 +268,568 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 > db.film.update({directors: { fname:"aditya",lname:"dhar"}},{$set:{"genre": ["comedy","drama"]}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
+Assignment 3 ---
+
+1.
+> db.film.find({title:/^d/},{$and:[{"year of release":2002},{"year of release": 2016}]}).pretty()
+{ "_id" : ObjectId("638ee82f981a41b09fceaf1c") }
+{ "_id" : ObjectId("638eec1e981a41b09fceaf1f") }
+
+2.
+> db.film.find({actors:{fname:"shahrukh",lname:"khan"}}).pretty()
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+
+5.
+> db.film.find({"release details": {"rating of film": 8.5}}).pretty()
+{
+	"_id" : ObjectId("638eeb40981a41b09fceaf1e"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+
+6.
+> db.film.find().sort({title: 1},{"year of release": -1}).pretty()
+{
+	"_id" : ObjectId("638eeb40981a41b09fceaf1e"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee58c981a41b09fceaf1b"),
+	"film id" : 103,
+	"title" : "Bharat",
+	"year of release" : 2019,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kartina",
+			"lname" : "karif"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee39f981a41b09fceaf1a"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("639034e54ee774167e82a9bd"),
+	"film id" : 110,
+	"title" : "Uri: The Surgical Strike",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy",
+		"drama"
+	],
+	"actors" : [
+		{
+			"fname" : "kirti",
+			"lname" : "kulhari"
+		},
+		{
+			"fname" : "ronnie",
+			"lname" : "screwvala"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "aditya",
+			"lname" : "dhar"
+		}
+	],
+	"release details" : [
+		{
+			"rating of film" : 2.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eec1e981a41b09fceaf1f"),
+	"film id" : 107,
+	"title" : "dangal",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kiran",
+			"lname" : "rao"
+		},
+		{
+			"fname" : "Siddharth",
+			"lname" : "kapur"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "Nitesh",
+			"lname" : "tiwari"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"23/12/2016"
+			]
+		},
+		{
+			"rating of film" : 6.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee82f981a41b09fceaf1c"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638ee90e981a41b09fceaf1d"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("638edf69981a41b09fceaf19"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eecd5981a41b09fceaf20"),
+	"film id" : 108,
+	"title" : "sultan",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "salman",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "anushka",
+			"lname" : "Sharma"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "ali abbas",
+			"lname" : "zafar"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"06/07/2016"
+			]
+		},
+		{
+			"rating of film" : 7.7
+		}
+	]
+}
+{
+	"_id" : ObjectId("638eed77981a41b09fceaf21"),
+	"film id" : 109,
+	"title" : "war",
+	"year of release" : 2019,
+	"genre" : [
+		"thriller"
+	],
+	"actors" : [
+		{
+			"fname" : "hrithik",
+			"lname" : "roshan"
+		},
+		{
+			"fname" : "tiger",
+			"lname" : "Shroff"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "siddharth",
+			"lname" : "anand"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"02/10/2019"
+			]
+		},
+		{
+			"rating of film" : 8.8
+		}
+	]
+}
+> 
+
 
 
 
