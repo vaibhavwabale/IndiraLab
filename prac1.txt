@@ -256,6 +256,18 @@ WriteResult({ "nRemoved" : 1 })
 > db.actor.remove({fname:"shahid"})
 WriteResult({ "nRemoved" : 1 })
 
+8.
+> db.actor.remove({age:{$gt:50}})
+WriteResult({ "nRemoved" : 2 })
+
+9.
+> db.actor.update({"actor id": 10},{$set:{address: [{street: "pimprigao"},{city:"nashik"},{state:"maharashtra"},{pincode:"321104"}]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+10.
+> db.film.update({directors: { fname:"aditya",lname:"dhar"}},{$set:{"genre": ["comedy","drama"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
 
 
 
