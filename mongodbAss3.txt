@@ -1,0 +1,779 @@
+Database Technologies: MongoDB Practical Assignment 3
+
+
+1. Find the titles of all the films starting with the letter 'd' released during the year 2015 and 2020.
+=>
+
+> db.film.find({$and:[{"year of release":{$gt:2015}},{"year of release": {$lt:2020}},{title:/^d/}]}).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3df"),
+	"film id" : 107,
+	"title" : "dangal",
+	"year of release" : 2016,
+	"genre" : [
+		"sport-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "kiran",
+			"lname" : "rao"
+		},
+		{
+			"fname" : "Siddharth",
+			"lname" : "kapur"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "Nitesh",
+			"lname" : "tiwari"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"23/12/2016"
+			]
+		},
+		{
+			"rating of film" : 6.5
+		}
+	]
+}
+
+
+
+2. Find the list of films acted by an actor "shahrukh khan".
+=>
+
+> db.film.find({actors:{fname:"shahrukh",lname:"khan"}}).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dc"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dd"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+
+
+
+3. Find all the films released in 90s.
+=>
+
+> db.film.find( { $and : [ { "year of release":{$gt:1990} }, { "year of release":{$lt:2000} } ] } ).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dd"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+
+
+4. Find all films belonging to "Adventure" and "Action" genre.
+=>
+
+> db.film.find({ $and : [ { "genre":"action" }, { "genre":"adventure" } ] } ).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3d9"),
+	"film id" : 101,
+	"title" : "saaho",
+	"year of release" : 2019,
+	"genre" : [
+		"action",
+		"adventure"
+	],
+	"actors" : [
+		{
+			"fname" : "prabhas",
+			"lname" : "india"
+		},
+		{
+			"fname" : "jacqueline",
+			"lname" : "fernandes"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "karan",
+			"lname" : "johar"
+		},
+		{
+			"fname" : "steve",
+			"lname" : "smith"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"mumbai",
+				"pune",
+				"nashik"
+			]
+		},
+		{
+			"dates" : [
+				"1/1/2019",
+				"2/2/2020"
+			]
+		},
+		{
+			"rating of film" : 4
+		}
+	]
+}
+
+
+5. Find all the films having '8.5' rating.
+=>
+
+> db.film.find({"release details": {"rating of film": 8.5}}).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3de"),
+	"film id" : 106,
+	"title" : "3 idiots",
+	"year of release" : 2009,
+	"genre" : [
+		"comedy-drama"
+	],
+	"actors" : [
+		{
+			"fname" : "aamir",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "R.",
+			"lname" : "Madhavan"
+		},
+		{
+			"fname" : "Sharman",
+			"lname" : "joshi"
+		},
+		{
+			"fname" : "Kareena",
+			"lname" : "kappor"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rajkumar",
+			"lname" : "hirani"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/12/2019"
+			]
+		},
+		{
+			"rating of film" : 8.5
+		}
+	]
+}
+
+
+6. Arrange the film names in ascending order and release year should be in descending order.
+=>
+
+
+
+
+7. Sort the actors in ascending order according to their age.
+=>
+
+> db.actor.find().sort({'age': 1}).pretty()
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e4"),
+	"actor id" : 2,
+	"fname" : "akshay",
+	"lname" : "kumar",
+	"address" : [
+		{
+			"street" : "krishna chowk"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411021"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "akshaykumar@gmail.com"
+		},
+		{
+			"phoneno" : "8695840128"
+		}
+	],
+	"age" : 19
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e3"),
+	"actor id" : 1,
+	"fname" : "aamir",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "new york"
+		},
+		{
+			"state" : "mid state"
+		},
+		{
+			"country" : "usa"
+		},
+		{
+			"pincode" : "62201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "aamirkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7995040688"
+		}
+	],
+	"age" : 25
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3eb"),
+	"actor id" : 9,
+	"fname" : "kriti",
+	"lname" : "kulhari",
+	"address" : [
+		{
+			"street" : "pimple saudhagar"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411081"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritikulhari@gmail.com"
+		},
+		{
+			"phoneno" : "8483042348"
+		}
+	],
+	"age" : 26
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e9"),
+	"actor id" : 7,
+	"fname" : "madhuri",
+	"lname" : "dixit",
+	"address" : [
+		{
+			"street" : "pimple gurav"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411031"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "madhuridixit@gmail.com"
+		},
+		{
+			"phoneno" : "9383042348"
+		}
+	],
+	"age" : 27
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e5"),
+	"actor id" : 3,
+	"fname" : "kriti",
+	"lname" : "sanon",
+	"address" : [
+		{
+			"street" : "chandni chowk"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "41201"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "kritisanongmail.com"
+		},
+		{
+			"phoneno" : "8183042188"
+		}
+	],
+	"age" : 29
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3ea"),
+	"actor id" : 8,
+	"fname" : "ronnie",
+	"lname" : "screwala",
+	"address" : [
+		{
+			"street" : "laxmi nagar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411301"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "ronniescrewala@gmail.com"
+		},
+		{
+			"phoneno" : "8885812328"
+		}
+	],
+	"age" : 30
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3ec"),
+	"actor id" : 10,
+	"fname" : "tiger",
+	"lname" : "shroff",
+	"address" : [
+		{
+			"street" : "pimprigao"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"pincode" : "321104"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "tigershroff@gmail.com"
+		},
+		{
+			"phoneno" : "7785812328"
+		}
+	],
+	"age" : 34
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e8"),
+	"actor id" : 6,
+	"fname" : "sharman",
+	"lname" : "joshi",
+	"address" : [
+		{
+			"street" : "gulmohar"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411311"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "sharmanjoshi@gmail.com"
+		},
+		{
+			"phoneno" : "8795812328"
+		}
+	],
+	"age" : 35
+}
+{
+	"_id" : ObjectId("6390c39c052473ba11c1d3e7"),
+	"actor id" : 5,
+	"fname" : "shahrukh",
+	"lname" : "khan",
+	"address" : [
+		{
+			"street" : "behind dinsour garden"
+		},
+		{
+			"city" : "pune"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "india"
+		},
+		{
+			"pincode" : "411061"
+		}
+	],
+	"contact details" : [
+		{
+			"emailid" : "shahrukhkhan@gmail.com"
+		},
+		{
+			"phoneno" : "7383042348"
+		}
+	],
+	"age" : 50
+}
+
+
+8. Find movies that are comedies or dramas and are released after 2013.
+=>
+
+> db.film.find({ $and : [ { $or : [ { "genre":"comedy" }, { "genre":"drama" } ] }, { "year of release":{$gt:2013} } ] } ).pretty()
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3da"),
+	"film id" : 102,
+	"title" : "Housefull 4",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy"
+	],
+	"actors" : [
+		{
+			"fname" : "akshay",
+			"lname" : "kumar"
+		},
+		{
+			"fname" : "kriti",
+			"lname" : "sanon"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "farhad",
+			"lname" : "samji"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune"
+			]
+		},
+		{
+			"dates" : [
+				"25/10/2019"
+			]
+		},
+		{
+			"rating of film" : 6
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3e2"),
+	"film id" : 110,
+	"title" : "Uri: The Surgical Strike",
+	"year of release" : 2019,
+	"genre" : [
+		"comedy",
+		"drama"
+	],
+	"actors" : [
+		{
+			"fname" : "kirti",
+			"lname" : "kulhari"
+		},
+		{
+			"fname" : "ronnie",
+			"lname" : "screwvala"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "aditya",
+			"lname" : "dhar"
+		}
+	],
+	"release details" : [
+		{
+			"rating of film" : 2.5
+		}
+	]
+}
+
+
+9. Show the latest 2 films acted by an actor "shahrukh".
+=>
+
+> db.film.find({ "actors.fname":"shahrukh" }).pretty().sort({"year of release":-1}).limit(2)
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dc"),
+	"film id" : 104,
+	"title" : "devdas",
+	"year of release" : 2002,
+	"genre" : [
+		"romantic"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "sanjay",
+			"lname" : "leela"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai"
+			]
+		},
+		{
+			"dates" : [
+				"25/06/2019"
+			]
+		},
+		{
+			"rating of film" : 5.5
+		}
+	]
+}
+{
+	"_id" : ObjectId("6390c127052473ba11c1d3dd"),
+	"film id" : 105,
+	"title" : "koyla",
+	"year of release" : 1997,
+	"genre" : [
+		"action"
+	],
+	"actors" : [
+		{
+			"fname" : "shahrukh",
+			"lname" : "khan"
+		},
+		{
+			"fname" : "madhuri",
+			"lname" : "dixit"
+		}
+	],
+	"directors" : [
+		{
+			"fname" : "rakesh",
+			"lname" : "roshan"
+		}
+	],
+	"release details" : [
+		{
+			"places of release" : [
+				"pune",
+				"mumbai",
+				"nagpur"
+			]
+		},
+		{
+			"dates" : [
+				"18/04/2019"
+			]
+		},
+		{
+			"rating of film" : 7.5
+		}
+	]
+}
+
+
+10.List the titles of films acted by actors "shahrukh" and "madhuri".
+=>
+
+> db.film.find( { $and : [ { "actors.fname":"shahrukh" }, { "actors.fname":"madhuri" }, ] }, { "title":1 } ).pretty()
+{ "_id" : ObjectId("6390c127052473ba11c1d3dc"), "title" : "devdas" }
+{ "_id" : ObjectId("6390c127052473ba11c1d3dd"), "title" : "koyla" }
+
+
+11.Retrieve films with an actor living in Spain.
+=>
+
+
+
+12.Retrieve films with actor details.
+=>
+
