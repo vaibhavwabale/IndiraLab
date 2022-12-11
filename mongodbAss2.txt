@@ -1,0 +1,719 @@
+Database Technologies: MongoDB Practical Assignment 2
+
+1. Create a database with name ‘Company’.
+=>
+
+> use company
+switched to db company
+
+
+2. An ‘Employee’ is a collection of documents with the following fields:
+	a. Employee ID
+	b. First Name
+	c. Last Name
+	d. Email
+	e. Phone No.
+	f. Address (House No, Street, City, State, Country, Pin-code)
+	g. Salary
+	h. Designation
+	i. Experience
+	j. Date of Joining
+	k. Birthdate
+=>
+
+> db.createCollection("employee")
+{ "ok" : 1 }
+	
+3. A ‘Transaction’ is a collection of documents with the following fields:
+	a. Transaction Id,
+	b. Transaction Date
+	c. Name (First Name of employee who processed the transaction)
+	d. Transaction Details (Item Id, Item Name, Quantity, Price)
+	e. Payment (Type of Payment (Debit/Credit/Cash), Total amount paid, Payment Successful)
+	f. Remark (Remark field can be empty.)
+=>
+
+> db.createCollection("transaction")
+{ "ok" : 1 }
+	
+	
+Queries:
+
+1. Insert at least 5 documents in ‘Employee’ collection.
+=>
+
+> db.employee.insert([{"Employee ID":"1","first name":"sanket","last name":"lande","email":"sanketlande@gmail.com","phoneno":9834238765,"address":[ {"house no":06}, {"street":"wall street"},{"city":"nashik"},{"state":"maharashtra"},{"country":"India"},{"pin code":422001}],"salary":100000,"designation":"Project Head","experience":4,"date of joining":"1/1/2019","birthday":"1/6/2001"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.employee.insert([{"Employee ID":"2","first name":"rohit","last name":"sonawane","email":"rohitsonawane@gmail.com","phoneno":8435769810,"address":[ {"house no":2},{"street":"may street"},{"city":"nashik"},{"state":"jammu"},{"country":"India"},{"pin code":411001}],"salary":200000,"designation":"Tester","experience":9,"date of joining":"2/2/2019","birthday":"11/6/2000"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.employee.insert([{"Employee ID":"3","first name":"shubham","last name":"sawant","email":"shubhamsawant@gmail.com","phoneno":8798658734,"address":[ {"house no":24},{"street":"wall street"},{"city":"nashik"},{"state":"maharashtra"},{"country":"India"},{"pin code":422001}],"salary":300000,"designation":"Android developer","experience":2,"date of joining":"10/5/2020","birthday":"25/04/2001"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.employee.insert([{"Employee ID":"4","first name":"prajakta","last name":"kamble","email":"prajaktakamble@gmail.com","phoneno":7639568790"address":[ {"house no":10},{"street":"wall street"},{"city":"nashik"},{"state":"maharashtra"},{"country":"India"},{"pin code":422001}],"salary":450000,"designation":"devops engineer","experience":4,"date of joining":"15/4/2020","birthday":"21/10/2002"}])
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:139
+> db.employee.insert([{"Employee ID":"4","first name":"prajakta","last name":"kamble","email":"prajaktakamble@gmail.com","phoneno":7639568790,"address":[ {"house no":10},{"street":"wall street"},{"city":"nashik"},{"state":"maharashtra"},{"country":"India"},{"pin code":422001}],"salary":450000,"designation":"devops engineer","experience":4,"date of joining":"15/4/2020","birthday":"21/10/2002"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.employee.insert([{"Employee ID":"5","first name":"siddesh","last name":"bhosale","email":"siddeshbhosale@gmail.com","phoneno":9834561254,"address":[ {"house no":4},{"street":"day street"},{"city":"jalandhar"},{"state":"punjab"},{"country":"India"},{"pin code":422001}],"salary":400000,"designation":"software developer","experience":8,"date of joining":"12/4/2020","birthday":"05/11/2000"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+
+2. Insert multiple documents (at least 10) into the ‘Transaction’ collection by passing an array of documents to the db.collection.insert () method.
+=>
+
+> db.Transaction.insert([{"transaction id":"111","transaction date":"10/4/2020","name":"sanket","transaction details":[{"item id":"111",},{"item name":"bike"},{"quantity":5},{"price":55000}],"payment":[{"type of payment":"cash"},{"total amount paid":4400},{"payment sucessful":"true"}],"remark":"bike purchased"},{"transaction id":"112","transaction date":"10/5/2020","name":"rohit","transaction details":[{"item id":"105",},{"item name":"bucket"},{"quantity":2},{"price":10000}],"payment":[{"type of payment":"debit"},{"total amount paid":400},{"payment sucessful":"false"}],"remark":"Not purchased yet"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.Transaction.insert([{"transaction id":"113","transaction date":"14/4/2020","name":"rohit","transaction details":[{"item id":"106",},{"item name":"mouse"},{"quantity":1},{"price":200}],"payment":[{"type of payment":"debit"},{"total amount paid":200},{"payment sucessful":"true"}],"remark":"mouse purchased"},{"transaction id":"114","transaction date":"21/5/2020","name":"rahul","transaction details":[{"item id":"107",},{"item name":"dumbells"},{"quantity":2},{"price":3000}],"payment":[{"type of payment":"cash"},{"total amount paid":1500},{"payment sucessful":"false"}],"remark":"Not purchased yet"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+> db.Transaction.insert([{"transaction id":"115","transaction date":"20/11/2020","name":"siddesh","transaction details":[{"item id":"108",},{"item name":"keyboard"},{"quantity":1},{"price":1000}],"payment":[{"type of payment":"cash"},{"total amount paid":400},{"payment sucessful":"false"}],"remark":"keyboard purchased"}
+... ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.Transaction.insert([{"transaction id":"116","transaction date":"01/1/2022","name":"rohini","transaction details":[{"item id":"111",},{"item name":"Ethernet cable"},{"quantity":2},{"price":500}],"payment":[{"type of payment":"debit"},{"total amount paid":500},{"payment sucessful":"true"}],"remark":"purchased"},{"transaction id":"117","transaction date":"04/1/2022","name":"aditya","transaction details":[{"item id":"112",},{"item name":"bag"},{"quantity":1},{"price":5000}],"payment":[{"type of payment":"cash"},{"total amount paid":5000},{"payment sucessful":"true"}],"remark":"purchased"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.Transaction.insert([{"transaction id":"118","transaction date":"21/1/2022","name":"prajakta","transaction details":[{"item id":"119",},{"item name":"Ty books"},{"quantity":3},{"price":514}],"payment":[{"type of payment":"cash"},{"total amount paid":514},{"payment sucessful":"true"}],"remark":"purchased"},{"transaction id":"119","transaction date":"25/1/2022","name":"sakshi","transaction details":[{"item id":"115",},{"item name":"lipstick"},{"quantity":1},{"price":200}],"payment":[{"type of payment":"debit"},{"total amount paid":100},{"payment sucessful":"false"}],"remark":"Not purchased yet"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.Transaction.insert([{"transaction id":"120","transaction date":"10/2/2022","name":"pratibha","transaction details":[{"item id":"120",},{"item name":"food resources"},{"quantity":1},{"price":2000}],"payment":[{"type of payment":"credit"},{"total amount paid":200},{"payment sucessful":"false"}],"remark":"Not purchased"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+
+3. Display all the documents of both the collections in a formatted manner.
+=>
+
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("63915a65bd59225693b318ad"),
+	"Employee ID" : "1",
+	"first name" : "sanket",
+	"last name" : "lande",
+	"email" : "sanketlande@gmail.com",
+	"phoneno" : 9834238765,
+	"address" : [
+		{
+			"house no" : 6
+		},
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "India"
+		},
+		{
+			"pin code" : 422001
+		}
+	],
+	"salary" : 100000,
+	"designation" : "Project Head",
+	"experience" : 4,
+	"date of joining" : "1/1/2019",
+	"birthday" : "1/6/2001"
+}
+{
+	"_id" : ObjectId("63915a92bd59225693b318ae"),
+	"Employee ID" : "2",
+	"first name" : "rohit",
+	"last name" : "sonawane",
+	"email" : "rohitsonawane@gmail.com",
+	"phoneno" : 8435769810,
+	"address" : [
+		{
+			"house no" : 2
+		},
+		{
+			"street" : "may street"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "jammu"
+		},
+		{
+			"country" : "India"
+		},
+		{
+			"pin code" : 411001
+		}
+	],
+	"salary" : 200000,
+	"designation" : "Tester",
+	"experience" : 9,
+	"date of joining" : "2/2/2019",
+	"birthday" : "11/6/2000"
+}
+{
+	"_id" : ObjectId("63915ab7bd59225693b318af"),
+	"Employee ID" : "3",
+	"first name" : "shubham",
+	"last name" : "sawant",
+	"email" : "shubhamsawant@gmail.com",
+	"phoneno" : 8798658734,
+	"address" : [
+		{
+			"house no" : 24
+		},
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "India"
+		},
+		{
+			"pin code" : 422001
+		}
+	],
+	"salary" : 300000,
+	"designation" : "Android developer",
+	"experience" : 2,
+	"date of joining" : "10/5/2020",
+	"birthday" : "25/04/2001"
+}
+{
+	"_id" : ObjectId("63915b34bd59225693b318b0"),
+	"Employee ID" : "4",
+	"first name" : "prajakta",
+	"last name" : "kamble",
+	"email" : "prajaktakamble@gmail.com",
+	"phoneno" : 7639568790,
+	"address" : [
+		{
+			"house no" : 10
+		},
+		{
+			"street" : "wall street"
+		},
+		{
+			"city" : "nashik"
+		},
+		{
+			"state" : "maharashtra"
+		},
+		{
+			"country" : "India"
+		},
+		{
+			"pin code" : 422001
+		}
+	],
+	"salary" : 450000,
+	"designation" : "devops engineer",
+	"experience" : 4,
+	"date of joining" : "15/4/2020",
+	"birthday" : "21/10/2002"
+}
+{
+	"_id" : ObjectId("63915b44bd59225693b318b1"),
+	"Employee ID" : "5",
+	"first name" : "siddesh",
+	"last name" : "bhosale",
+	"email" : "siddeshbhosale@gmail.com",
+	"phoneno" : 9834561254,
+	"address" : [
+		{
+			"house no" : 4
+		},
+		{
+			"street" : "day street"
+		},
+		{
+			"city" : "jalandhar"
+		},
+		{
+			"state" : "punjab"
+		},
+		{
+			"country" : "India"
+		},
+		{
+			"pin code" : 422001
+		}
+	],
+	"salary" : 400000,
+	"designation" : "software developer",
+	"experience" : 8,
+	"date of joining" : "12/4/2020",
+	"birthday" : "05/11/2000"
+}
+
+
+> db.Transaction.find().pretty()
+{
+	"_id" : ObjectId("63915d0cbd59225693b318b2"),
+	"transaction id" : "111",
+	"transaction date" : "10/4/2020",
+	"name" : "sanket",
+	"transaction details" : [
+		{
+			"item id" : "111"
+		},
+		{
+			"item name" : "bike"
+		},
+		{
+			"quantity" : 5
+		},
+		{
+			"price" : 55000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "cash"
+		},
+		{
+			"total amount paid" : 4400
+		},
+		{
+			"payment sucessful" : "true"
+		}
+	],
+	"remark" : "bike purchased"
+}
+{
+	"_id" : ObjectId("63915d0cbd59225693b318b3"),
+	"transaction id" : "112",
+	"transaction date" : "10/5/2020",
+	"name" : "rohit",
+	"transaction details" : [
+		{
+			"item id" : "105"
+		},
+		{
+			"item name" : "bucket"
+		},
+		{
+			"quantity" : 2
+		},
+		{
+			"price" : 10000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "debit"
+		},
+		{
+			"total amount paid" : 400
+		},
+		{
+			"payment sucessful" : "false"
+		}
+	],
+	"remark" : "Not purchased yet"
+}
+{
+	"_id" : ObjectId("639609bb6b931662b2f5288f"),
+	"transaction id" : "113",
+	"transaction date" : "14/4/2020",
+	"name" : "rohit",
+	"transaction details" : [
+		{
+			"item id" : "106"
+		},
+		{
+			"item name" : "mouse"
+		},
+		{
+			"quantity" : 1
+		},
+		{
+			"price" : 200
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "debit"
+		},
+		{
+			"total amount paid" : 200
+		},
+		{
+			"payment sucessful" : "true"
+		}
+	],
+	"remark" : "mouse purchased"
+}
+{
+	"_id" : ObjectId("639609bb6b931662b2f52890"),
+	"transaction id" : "114",
+	"transaction date" : "21/5/2020",
+	"name" : "rahul",
+	"transaction details" : [
+		{
+			"item id" : "107"
+		},
+		{
+			"item name" : "dumbells"
+		},
+		{
+			"quantity" : 2
+		},
+		{
+			"price" : 3000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "cash"
+		},
+		{
+			"total amount paid" : 1500
+		},
+		{
+			"payment sucessful" : "false"
+		}
+	],
+	"remark" : "Not purchased yet"
+}
+{
+	"_id" : ObjectId("63960a4c6b931662b2f52891"),
+	"transaction id" : "115",
+	"transaction date" : "20/11/2020",
+	"name" : "siddesh",
+	"transaction details" : [
+		{
+			"item id" : "108"
+		},
+		{
+			"item name" : "keyboard"
+		},
+		{
+			"quantity" : 1
+		},
+		{
+			"price" : 1000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "cash"
+		},
+		{
+			"total amount paid" : 400
+		},
+		{
+			"payment sucessful" : "false"
+		}
+	],
+	"remark" : "keyboard purchased"
+}
+{
+	"_id" : ObjectId("63960b136b931662b2f52892"),
+	"transaction id" : "116",
+	"transaction date" : "01/1/2022",
+	"name" : "rohini",
+	"transaction details" : [
+		{
+			"item id" : "111"
+		},
+		{
+			"item name" : "Ethernet cable"
+		},
+		{
+			"quantity" : 2
+		},
+		{
+			"price" : 500
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "debit"
+		},
+		{
+			"total amount paid" : 500
+		},
+		{
+			"payment sucessful" : "true"
+		}
+	],
+	"remark" : "purchased"
+}
+{
+	"_id" : ObjectId("63960b136b931662b2f52893"),
+	"transaction id" : "117",
+	"transaction date" : "04/1/2022",
+	"name" : "aditya",
+	"transaction details" : [
+		{
+			"item id" : "112"
+		},
+		{
+			"item name" : "bag"
+		},
+		{
+			"quantity" : 1
+		},
+		{
+			"price" : 5000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "cash"
+		},
+		{
+			"total amount paid" : 5000
+		},
+		{
+			"payment sucessful" : "true"
+		}
+	],
+	"remark" : "purchased"
+}
+{
+	"_id" : ObjectId("63960bad6b931662b2f52894"),
+	"transaction id" : "118",
+	"transaction date" : "21/1/2022",
+	"name" : "prajakta",
+	"transaction details" : [
+		{
+			"item id" : "119"
+		},
+		{
+			"item name" : "Ty books"
+		},
+		{
+			"quantity" : 3
+		},
+		{
+			"price" : 514
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "cash"
+		},
+		{
+			"total amount paid" : 514
+		},
+		{
+			"payment sucessful" : "true"
+		}
+	],
+	"remark" : "purchased"
+}
+{
+	"_id" : ObjectId("63960bad6b931662b2f52895"),
+	"transaction id" : "119",
+	"transaction date" : "25/1/2022",
+	"name" : "sakshi",
+	"transaction details" : [
+		{
+			"item id" : "115"
+		},
+		{
+			"item name" : "lipstick"
+		},
+		{
+			"quantity" : 1
+		},
+		{
+			"price" : 200
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "debit"
+		},
+		{
+			"total amount paid" : 100
+		},
+		{
+			"payment sucessful" : "false"
+		}
+	],
+	"remark" : "Not purchased yet"
+}
+{
+	"_id" : ObjectId("63960c2c6b931662b2f52896"),
+	"transaction id" : "120",
+	"transaction date" : "10/2/2022",
+	"name" : "pratibha",
+	"transaction details" : [
+		{
+			"item id" : "120"
+		},
+		{
+			"item name" : "food resources"
+		},
+		{
+			"quantity" : 1
+		},
+		{
+			"price" : 2000
+		}
+	],
+	"payment" : [
+		{
+			"type of payment" : "credit"
+		},
+		{
+			"total amount paid" : 200
+		},
+		{
+			"payment sucessful" : "false"
+		}
+	],
+	"remark" : "Not purchased"
+}
+
+
+4. Update salary of all employees by giving an increment of Rs. 4000.
+=>
+
+> db.employee.updateMany({},{$inc:{"salary":4000}})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+
+
+5. Update the remark for transaction id 201.
+=>
+
+> db.Transaction.update({"transaction id":"111"},{$set:{"remarks":"MongoDB is Awesome"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+6. Update designation of an employee named "siddesh bhosale" from supervisor to manager.
+=>
+
+> db.employee.update({"first name":"siddesh","last name":"bhosale"},{$set:{"designation":"manager"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+7. Update designation of an employee having Employee Id as "5".
+=>
+
+> db.employee.update({"Employee ID":"5"},{$set:{"designation":"supervisor"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+8. Change the address of an employee having Employee Id as "2".
+=>
+
+> db.employee.update({"Employee ID":"2"},{$set:{"address":[{"house no":10},{"street":"kokan chowk"},{"city":"pune"},{"state":"maharashtra"},{"country":"India"},{"pin code":411100}]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+9. Delete transaction made by "rohit" employee on the given date.
+=>
+
+> db.Transaction.remove({"name":"rohit"},{"transaction date":"10/5/2020"})
+WriteResult({ "nRemoved" : 2 })
+
+
+10.Delete all the employees whose first name starts with ‘P’.
+=>
+
+> db.employee.remove({"first name":/^p/})
+WriteResult({ "nRemoved" : 1 })
