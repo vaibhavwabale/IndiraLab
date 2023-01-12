@@ -1,0 +1,77 @@
+Assignment 4
+
+Consider Student Database
+Create a collection with the following fields : (SRN, Sname, Degree, Sem, CGPA)
+Insert at least 10 documents.
+
+use student
+'switched to db student'
+
+db.createCollection("stud")
+{ ok: 1 }
+
+show collections
+stud
+
+db.stud.insertMany([
+    {srn:01,sname:"vaibhav",degree:"BCA",sem:2,cgpa:8.5},
+    {srn:02,sname:"rahul",degree:"BSC",sem:4,cgpa:7.5},
+    {srn:03,sname:"sanket",degree:"BCA",sem:5,cgpa:6.5},
+    {srn:04,sname:"siddesh",degree:"BSC",sem:6,cgpa:9.5},
+    {srn:05,sname:"rohit",degree:"BCA",sem:6,cgpa:5.5},
+    {srn:06,sname:"adity",degree:"BCA",sem:3,cgpa:9.9},
+    {srn:07,sname:"sohan",degree:"BSC",sem:2,cgpa:5.5},
+    {srn:08,sname:"abhi",degree:"BCA",sem:3,cgpa:6.6},
+    {srn:09,sname:"prajakta",degree:"BCA",sem:4,cgpa:9.8},
+    {srn:10,sname:"sakshi",degree:"BSC",sem:6,cgpa:8.8}
+    ])
+
+Queries:
+
+1.Display all the documents
+
+=> db.stud.find().pretty()
+
+2.Display all the students in BCA
+
+=> db.stud.find({degree:"BCA"}).pretty()
+
+3.Display all the students in ascending order
+
+=> db.stud.find().sort({sname:1}).pretty()
+
+4.Display first 5 students
+
+=> db.stud.find().limit(5).pretty()
+
+5.list the degree of student "Rahul"
+
+=> db.stud.find({sname:"rahul"},{degree:1}).pretty()
+
+6.Display the number of students in BCA
+
+=> db.stud.find({degree:"BCA"}).count()
+
+7.Display all the degrees without _id
+
+=> db.stud.find({},{_id:0}).pretty()
+
+8.Display all the distinct degrees
+
+=> db.stud.distinct("degree")
+
+9.Display all the BCA students with CGPA greater than 6, but less than 7.5
+
+=> db.stud.find(degree:"BCA",{cgpa:{$gt:6, $lt:7.5}})
+
+10.Display all the students in BCA and in 6th Sem
+
+=> db.stud.find({$and:[{degree:"BCA"},{sem:6}]})
+
+
+
+
+
+
+
+
